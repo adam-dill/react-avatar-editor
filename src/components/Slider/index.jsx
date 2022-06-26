@@ -9,7 +9,7 @@ const Slider = ({label, initialValue, onChange}) => {
     }
 
     return (
-        <div>
+        <div className="slider-container">
             <label>{label}</label>
             <input type="range" value={value} onChange={handleChange} />
         </div>

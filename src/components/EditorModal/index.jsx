@@ -1,0 +1,79 @@
+import React, { useState, useRef } from 'react';
+import AvatarEditor from '../AvatarEditor';
+import Slider from '../Slider';
+import CameraIcon from '../../assets/camera-icon.svg';
+import RotateIcon from '../../assets/rotate-icon.svg';
+import Placeholder from '../../assets/placeholder.jpg';
+
+const EditorModal = ({toggleModal}) => {
+    const fileUpload = useRef(null);
+    const [image, setImage] = useState(Placeholder);
+    const [zoom, setZoom] = useState(1);
+    const [rotation, setRotation] = useState(0);
+    const [rotationShift, setRotationShift] = useState(0);
+
+    const handleFile = () => {
+        const files = fileUpload.current.files;
+
+        if (files && files[0]) {
+            setImage(files[0]);
+        }
+    }
+
+    const handleZoomChange = (value) => {
+        setZoom(mapRange(value, 0, 100, 0.5, 1.5));
+    }
+
+    const handleRotationChange = (value) => {
+        setRotation(mapRange(value, 0, 100, -45, 45))
+    }
+
+    const handleRotationShift = () => {
+        setRotationShift((previous) => {
+            let newValue = previous + 90;
+            if (newValue >= 360) {
+                newValue = newValue - 360;
+            }
+            return newValue;
+        })
+    }
+
+    const mapRange = (number, in_min, in_max, out_min, out_max) => {
+        return (number - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    }
+
+    return (
+        <div className="editor-modal">
+            <div className="modal-content">
+                <AvatarEditor
+                    width={350}
+                    height={350}
+                    image={image}
+                    scale={zoom}
+                    rotate={(rotation + rotationShift)} />
+                
+                <div className="controls">
+                    <div className="image-upload">
+                        <label htmlFor="imageUpload">
+                            <img src={CameraIcon} className="image-upload-icon" alt=""/>
+                        </label>
+                        <input ref={fileUpload} className="sr-only" id="imageUpload" type="file" onChange={handleFile} />
+                    </div>
+                    <button onClick={handleRotationShift} className="rotate-button">
+                        <label className="sr-only">Rotate</label>
+                        <img src={RotateIcon} alt="" />
+                    </button>
+                    <Slider label="rotation" initialValue={50} onChange={handleRotationChange} />
+                    <Slider label="zoom" initialValue={50} onChange={handleZoomChange} />
+                    <div>
+                        <button className="btn cancel-button" onClick={toggleModal}>Cancel</button>
+                        <button className="btn save-button">Save</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default EditorModal;
