@@ -1,18 +1,39 @@
 import React, { useState } from 'react';
 import EditorModal from './components/EditorModal';
+import Placeholder from './assets/placeholder.jpg';
+import CameraIcon from './assets/camera-icon.svg';
 
 const App = () => {
     const [show, setShow] = useState(false);
+    const [image, setImage] = useState(Placeholder);
     
     const handleUploadClick = (e) => {
         setShow((previous) => !previous);
     }
+    
+    const handleOnSave = (image) => {
+        console.log('save', image)
+        setImage(image);
+        setShow(false);
+    }
 
     return (
-        <div className="App">
-            {show && <EditorModal toggleModal={handleUploadClick} />}
-            <button onClick={handleUploadClick}>Upload/Edit Your Profile Picture</button>
-        </div>
+        <>
+            {show && (
+                <EditorModal 
+                    imageDisplay={image}
+                    toggleModal={handleUploadClick} 
+                    onSave={handleOnSave}/>
+            )}
+            <div className="image-container">
+                <div className="image-upload">
+                    <button onClick={handleUploadClick}>
+                        <img src={CameraIcon} className="image-upload-icon" alt=""/>
+                    </button>
+                </div>
+                <img src={image} alt="" className="display-image" />
+            </div>
+        </>
     );
 }
 

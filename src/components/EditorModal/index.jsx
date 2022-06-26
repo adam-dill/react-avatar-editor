@@ -3,11 +3,11 @@ import AvatarEditor from '../AvatarEditor';
 import Slider from '../Slider';
 import CameraIcon from '../../assets/camera-icon.svg';
 import RotateIcon from '../../assets/rotate-icon.svg';
-import Placeholder from '../../assets/placeholder.jpg';
 
-const EditorModal = ({toggleModal}) => {
+const EditorModal = ({toggleModal, onSave, imageDisplay}) => {
+    const editor = useRef(null);
     const fileUpload = useRef(null);
-    const [image, setImage] = useState(Placeholder);
+    const [image, setImage] = useState(imageDisplay);
     const [zoom, setZoom] = useState(1);
     const [rotation, setRotation] = useState(0);
     const [rotationShift, setRotationShift] = useState(0);
@@ -38,6 +38,20 @@ const EditorModal = ({toggleModal}) => {
         })
     }
 
+    const handleSaveClick = async () => {
+        if (editor) {
+            // This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
+            // drawn on another canvas, or added to the DOM.
+            //const canvas = editor.current.getImage(); // or editor.current.getImageScaledToCanvas()
+            const dataUrl = editor.current.getImageScaledToCanvas().toDataURL("image/jpeg")
+            const result = await fetch(dataUrl)
+            const blob = await result.blob()
+        
+            const image = window.URL.createObjectURL(blob)
+            onSave(image);
+          }
+    }
+
     const mapRange = (number, in_min, in_max, out_min, out_max) => {
         return (number - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
@@ -46,6 +60,7 @@ const EditorModal = ({toggleModal}) => {
         <div className="editor-modal">
             <div className="modal-content">
                 <AvatarEditor
+                    ref={editor}
                     width={350}
                     height={350}
                     image={image}
@@ -67,13 +82,17 @@ const EditorModal = ({toggleModal}) => {
                     <Slider label="zoom" initialValue={50} onChange={handleZoomChange} />
                     <div>
                         <button className="btn cancel-button" onClick={toggleModal}>Cancel</button>
-                        <button className="btn save-button">Save</button>
+                        <button className="btn save-button" onClick={handleSaveClick}>Save</button>
                     </div>
                     
                 </div>
             </div>
         </div>
     )
+}
+
+EditorModal.defaultProps = {
+    onSave: () => {}
 }
 
 export default EditorModal;
