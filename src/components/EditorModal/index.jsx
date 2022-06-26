@@ -66,7 +66,10 @@ const EditorModal = ({toggleModal, onSave, imageDisplay}) => {
                     height={350}
                     image={image}
                     scale={zoom}
-                    rotate={(rotation + rotationShift)} />
+                    rotate={(rotation + rotationShift)}
+                    backgroundColor="#000"
+                    showGrid={true}
+                    gridColor="#666"  />
                 
                 <div className={styles["controls"]}>
                     <div className={styles["image-upload"]}>

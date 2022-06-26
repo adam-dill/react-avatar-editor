@@ -62,6 +62,34 @@ const drawRoundedRect = (
     }
 }
 
+// Draws a "Rule of Three" grid on the canvas.
+const drawGrid = (
+    context,
+    x,
+    y,
+    width,
+    height,
+    gridColor,
+) => {
+    context.fillStyle = gridColor;
+    const thirdsX = width / 3;
+    const thirdsY = height / 3;
+
+    // vertical bars
+    context.fillRect(x, y, 1, height);
+    context.fillRect(thirdsX + x, y, 1, height);
+    context.fillRect((thirdsX * 2) + x, y, 1, height);
+    context.fillRect((thirdsX * 3) + x, y, 1, height);
+    context.fillRect((thirdsX * 4) + x, y, 1, height);
+
+    // horizontal bars
+    context.fillRect(x, y, width, 1);
+    context.fillRect(x, thirdsY + y, width, 1);
+    context.fillRect(x, (thirdsY * 2) + y, width, 1);
+    context.fillRect(x, (thirdsY * 3) + y, width, 1);
+    context.fillRect(x, (thirdsY * 4) + y, width, 1);
+}
+
 const defaultEmptyImage = {
     x: 0.5,
     y: 0.5,
@@ -83,6 +111,8 @@ class AvatarEditor extends React.Component {
         width: 200,
         height: 200,
         color: [0, 0, 0, 0.5],
+        showGrid: false,
+        gridColor: '#666',
         disableBoundaryChecks: false,
         disableHiDPIScaling: false,
         disableCanvasRotation: true,
@@ -514,7 +544,17 @@ class AvatarEditor extends React.Component {
         )
         context.rect(width, 0, -width, height) // outer rect, drawn "counterclockwise"
         context.fill('evenodd')
-
+        
+        if (this.props.showGrid) {
+            drawGrid(
+                context,
+                borderSizeX,
+                borderSizeY,
+                width - borderSizeX * 2,
+                height - borderSizeY * 2,
+                this.props.gridColor,
+            )
+        }
         context.restore()
     }
 
