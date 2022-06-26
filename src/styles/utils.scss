@@ -1,0 +1,15 @@
+.sr-only { display: none; }
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 10%;
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid gray;
+    background: none;
+    cursor: pointer;
+}
+
+svg {
+    width: 40px;
+    height: 40px;
+}

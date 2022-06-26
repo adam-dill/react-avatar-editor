@@ -1,0 +1,57 @@
+@import '../../styles/utils.scss';
+
+.save-button {
+    @extend .btn;
+    background-color: green;
+}
+
+.cancel-button {
+    @extend .btn;
+    background-color: gray;
+    margin-right: 4px;
+}
+
+.image-upload-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.editor-modal {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.editor-modal .modal-content {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 1rem;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2))
+}
+
+.editor-modal .modal-content canvas {
+    align-self: center;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.rotate-button {
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}

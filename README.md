@@ -27,11 +27,7 @@ npm i --save react-avatar-editor
 
 pnpm add react-avatar-editor
 ```
-
-## [Demo](https://react-avatar-editor.netlify.com/)
-
-![](https://thumbs.gfycat.com/FlawedBlushingGermanwirehairedpointer-size_restricted.gif)
-
+## [Demo](https://avatar-editor.herokuapp.com/)
 
 ## Usage
 

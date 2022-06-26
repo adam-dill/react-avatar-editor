@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import styles from './index.module.scss';
 
 const Slider = ({label, initialValue, onChange}) => {
     const [value, setValue] = useState(initialValue);
@@ -9,7 +10,7 @@ const Slider = ({label, initialValue, onChange}) => {
     }
 
     return (
-        <div className="slider-container">
+        <div className={styles["slider-container"]}>
             <label>{label}</label>
             <input type="range" value={value} onChange={handleChange} />
         </div>

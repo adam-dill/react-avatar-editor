@@ -3,6 +3,7 @@ import AvatarEditor from '../AvatarEditor';
 import Slider from '../Slider';
 import CameraIcon from '../../assets/camera-icon.svg';
 import RotateIcon from '../../assets/rotate-icon.svg';
+import styles from './index.module.scss';
 
 const EditorModal = ({toggleModal, onSave, imageDisplay}) => {
     const editor = useRef(null);
@@ -57,8 +58,8 @@ const EditorModal = ({toggleModal, onSave, imageDisplay}) => {
     }
 
     return (
-        <div className="editor-modal">
-            <div className="modal-content">
+        <div className={styles["editor-modal"]}>
+            <div className={styles["modal-content"]}>
                 <AvatarEditor
                     ref={editor}
                     width={350}
@@ -67,22 +68,22 @@ const EditorModal = ({toggleModal, onSave, imageDisplay}) => {
                     scale={zoom}
                     rotate={(rotation + rotationShift)} />
                 
-                <div className="controls">
-                    <div className="image-upload">
+                <div className={styles["controls"]}>
+                    <div className={styles["image-upload"]}>
                         <label htmlFor="imageUpload">
-                            <img src={CameraIcon} className="image-upload-icon" alt=""/>
+                            <img src={CameraIcon} className={styles["image-upload-icon"]} alt=""/>
                         </label>
                         <input ref={fileUpload} className="sr-only" id="imageUpload" type="file" onChange={handleFile} />
                     </div>
-                    <button onClick={handleRotationShift} className="rotate-button">
+                    <button onClick={handleRotationShift} className={styles["rotate-button"]}>
                         <label className="sr-only">Rotate</label>
                         <img src={RotateIcon} alt="" />
                     </button>
                     <Slider label="rotation" initialValue={50} onChange={handleRotationChange} />
                     <Slider label="zoom" initialValue={50} onChange={handleZoomChange} />
                     <div>
-                        <button className="btn cancel-button" onClick={toggleModal}>Cancel</button>
-                        <button className="btn save-button" onClick={handleSaveClick}>Save</button>
+                        <button className={styles["cancel-button"]} onClick={toggleModal}>Cancel</button>
+                        <button className={styles["save-button"]} onClick={handleSaveClick}>Save</button>
                     </div>
                     
                 </div>

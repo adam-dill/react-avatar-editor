@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import EditorModal from './components/EditorModal';
+import ImageDisplay from './components/ImageDisplay';
 import Placeholder from './assets/placeholder.jpg';
-import CameraIcon from './assets/camera-icon.svg';
 
 const App = () => {
     const [show, setShow] = useState(false);
@@ -12,7 +12,6 @@ const App = () => {
     }
     
     const handleOnSave = (image) => {
-        console.log('save', image)
         setImage(image);
         setShow(false);
     }
@@ -23,16 +22,11 @@ const App = () => {
                 <EditorModal 
                     imageDisplay={image}
                     toggleModal={handleUploadClick} 
-                    onSave={handleOnSave}/>
+                    onSave={handleOnSave} />
             )}
-            <div className="image-container">
-                <div className="image-upload">
-                    <button onClick={handleUploadClick}>
-                        <img src={CameraIcon} className="image-upload-icon" alt=""/>
-                    </button>
-                </div>
-                <img src={image} alt="" className="display-image" />
-            </div>
+            <ImageDisplay 
+                image={image} 
+                onClick={handleUploadClick} />
         </>
     );
 }
