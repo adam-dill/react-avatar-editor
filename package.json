@@ -1,31 +1,38 @@
 {
-  "name": "react-avatar-editor-mono",
-  "engines": {
-    "pnpm": "6.x"
+  "name": "react-avatar-editor",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.0"
   },
-  "version": "1.0.0",
   "scripts": {
-    "build": "pnpm --filter react-avatar-editor build",
-    "clean": "pnpm --filter 'react-avatar-editor*' clean",
-    "demo:build": "pnpm --filter 'react-avatar-editor*' build",
-    "demo:dev": "pnpm build && pnpm --filter react-avatar-editor-demo dev",
-    "lint": "eslint . --cache --ext .ts,.tsx",
-    "prepublishOnly": "pnpm lint && pnpm build",
-    "postversion": "git push --tags origin HEAD"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "devDependencies": {
-    "@types/react": "18.0.8",
-    "@typescript-eslint/eslint-plugin": "5.22.0",
-    "@typescript-eslint/parser": "5.22.0",
-    "eslint": "8.14.0",
-    "eslint-config-prettier": "8.5.0",
-    "prettier": "2.6.2",
-    "typescript": "4.6.4"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "license": "MIT",
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "all",
-    "semi": false
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

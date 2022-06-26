@@ -1,14 +1,14 @@
 import { loadImageURL } from './loadImageURL'
 
-export const loadImageFile = (file: File) =>
-  new Promise<HTMLImageElement>((resolve, reject) => {
+export const loadImageFile = (file) =>
+  new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.onload = (e) => {
       try {
         if (!e?.target?.result) {
           throw new Error('No image data')
         }
-        const image = loadImageURL(e.target.result as string)
+        const image = loadImageURL(String(e.target.result))
         resolve(image)
       } catch (e) {
         reject(e)
